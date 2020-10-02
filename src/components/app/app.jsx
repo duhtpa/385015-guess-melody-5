@@ -13,7 +13,6 @@ const App = (props) => {
   const {errorsCount} = props;
 
   return (
-    // <WelcomeScreen errorsCount={errorsCount} />
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
