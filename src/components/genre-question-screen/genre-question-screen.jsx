@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import genreQuestionProp from "./genre-question.prop";
 
-
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
@@ -13,7 +12,7 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {onAnswer, question, renderPlayer} = this.props;
+    const {onAnswer, question, renderPlayer, children} = this.props;
     const {answers: userAnswers} = this.state;
     const {
       answers,
@@ -33,16 +32,11 @@ class GenreQuestionScreen extends PureComponent {
               style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
           </svg>
 
-          <div className="game__mistakes">
-            <div className="wrong"/>
-            <div className="wrong"/>
-            <div className="wrong"/>
-          </div>
+          {children}
         </header>
 
         <section className="game__screen">
           <h2 className="game__title">Выберите {genre} треки</h2>
-
           <form
             className="game__tracks"
             onSubmit={(evt) => {
@@ -54,8 +48,7 @@ class GenreQuestionScreen extends PureComponent {
               <div key={`${i}-${answer.src}`} className="track">
                 {renderPlayer(answer.src, i)}
                 <div className="game__answer">
-                  <input className="game__input visually-hidden" type="checkbox" name="answer"
-                    value={`answer-${i}`}
+                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`}
                     id={`answer-${i}`}
                     checked={userAnswers[i]}
                     onChange={(evt) => {
@@ -83,6 +76,7 @@ GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: genreQuestionProp,
   renderPlayer: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default GenreQuestionScreen;
